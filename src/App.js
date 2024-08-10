@@ -37,61 +37,52 @@ import CustomSpinner from './Components/CustomLoader/loader';
 import PublicRoute from './layout/PublicRoute';
 
 function App() {
-  const {userDetails} = useSelector((state) => state.userStore);
-  const {isLoading}= useSelector((state)=>state?.commonStore)
-  
-  useEffect(()=>{
-    
-  },[])
+  const { userDetails } = useSelector((state) => state.userStore);
+  const { isLoading } = useSelector((state) => state?.commonStore)
+
+  useEffect(() => {
+
+  }, [])
   return (
     <HashRouter>
-      {isLoading && <CustomSpinner/>}
+      {isLoading && <CustomSpinner />}
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-        <Route element={<PrivateRoute userData={userDetails} />}>
-         
-          <Route exact path="/prebooking-trips" element={<PrebookingTrips/>} />
-          <Route exact path="/edit-profile" element={<EditProfile/>} />
-          <Route exact path="/my-preferences" element={<MyPreferences/>} />
-          <Route exact path="/add-balance" element={<AddBalance/>} />
-          <Route exact path="/add-balance-form" element={<AddBalanceForm/>} />
-          <Route exact path="/book-tour" element={<BookTour/>} />
-          <Route exact path="/register-traveler" element={<RegisterTraveler/>} />
-          <Route exact path="/my-wallet" element={<MyWallet/>} />
-          <Route exact path="/withdraw-balance" element={<WithdrawBalance/>} />
-          <Route exact path="/verifications" element={<Verification/>} />
-          <Route exact path="/notifications" element={<Notifications/>} />
-          <Route exact path="/my-rates" element={<MyRates/>} />
-          <Route exact path="/my-trip" element={<MyTrip/>} />
-        </Route>
-          <Route  element={<PublicRoute userData={userDetails} />}>
-          <Route exact path="/login" element={<Login/>} />
-          <Route exact path="/forget-password" element={<ForgetPassword/>} />
-          <Route exact path="/new-password" element={<NewPassword/>} />
+          <Route element={<PrivateRoute userData={userDetails} />}>
+
+            <Route exact path="/prebooking-trips" element={<PrebookingTrips />} />
+            <Route exact path="/edit-profile" element={<EditProfile />} />
+            <Route exact path="/my-preferences" element={<MyPreferences />} />
+            <Route exact path="/add-balance" element={<AddBalance />} />
+            <Route exact path="/add-balance-form" element={<AddBalanceForm />} />
+            <Route exact path="/book-tour" element={<BookTour />} />
+            <Route exact path="/register-traveler" element={<RegisterTraveler />} />
+            <Route exact path="/my-wallet" element={<MyWallet />} />
+            <Route exact path="/withdraw-balance" element={<WithdrawBalance />} />
+            <Route exact path="/verifications" element={<Verification />} />
+            <Route exact path="/notifications" element={<Notifications />} />
+            <Route exact path="/my-rates" element={<MyRates />} />
+            <Route exact path="/my-trip" element={<MyTrip />} />
+          </Route>
+          <Route element={<PublicRoute userData={userDetails} />}>
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/forget-password" element={<ForgetPassword />} />
+            <Route exact path="/new-password" element={<NewPassword />} />
           </Route>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/services" element={<Services />} />
           <Route exact path="/contact-us" element={<ContactUs />} />
           <Route exact path="/about-us" element={<AboutUs />} />
           <Route exact path="/faq" element={<Faq />} />
-          <Route exact path="/tourism-tours" element={<TourismTours/>} />
-          <Route exact path="/news" element={<News/>} />
-          
-         
-          <Route exact path="/verification" element={<VerificationCode/>} />
-          <Route exact path="/news-details" element={<NewsDetails/>} />
-          <Route exact path="/privacy-policy" element={<PrivacyPolicy/>} />
-          <Route exact path="/terms-of-use" element={<TermsOfUse/>} />
-          
-          {/* </Route> */}
-          
-          <Route exact path="/registration" element={<Registration/>} />
-        
-         
-          
-          <Route exact path="/city-tour-al-ula" element={<CityTourAlUla/>} />
-         
-          <Route exact path="/city-tour-al-ula-single" element={<CityTourAlUlaSingle/>} />
+          <Route exact path="/tourism-tours" element={<TourismTours />} />
+          <Route exact path="/news" element={<News />} />
+          <Route exact path="/verification" element={<VerificationCode />} />
+          <Route exact path="/news-details" element={<NewsDetails />} />
+          <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route exact path="/terms-of-use" element={<TermsOfUse />} />
+          <Route exact path="/registration" element={<Registration />} />
+          <Route exact path="/city-tour-al-ula" element={<CityTourAlUla />} />
+          <Route exact path="/city-tour-al-ula-single" element={<CityTourAlUlaSingle />} />
         </Routes>
       </Suspense>
     </HashRouter>
