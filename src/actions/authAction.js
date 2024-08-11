@@ -3,6 +3,7 @@ import { resetUserDetails, setAuth, setIsUploading, setUserDetails } from "../sl
 import * as Api from "../services/authService"
 import { setIsLoading } from "../slices/commonSlice";
 import { toast } from "react-toastify";
+import { ROUTESCONSTANTS } from "../constants/authConstants";
 export const setInitialAuthState = (navigate) => async (dispatch) => {
     await dispatch(resetUserDetails());
     navigate("/login");
@@ -10,12 +11,13 @@ export const setInitialAuthState = (navigate) => async (dispatch) => {
 
   export const initializeAuth = () => async (dispatch) => {
     const accessToken = JSON.parse(localStorage.getItem("profile"))?.accessToken||JSON.parse(sessionStorage.getItem("profile"))?.accessToken;
-   
+        
+    const userData=JSON.parse(localStorage.getItem("profile"))?.accessToken?JSON.parse(localStorage.getItem("profile")):JSON.parse(sessionStorage.getItem("profile"))
   
     if (accessToken ) {
      
         
-        dispatch(setUserDetails(JSON.parse(localStorage.getItem("profile")).user));
+        dispatch(setUserDetails(userData?.user));
       } else {
         // await dispatch(refreshTokenAction(refreshToken));
       }
@@ -130,9 +132,12 @@ export const setInitialAuthState = (navigate) => async (dispatch) => {
 
     }
   }
-
+export const isSession=()=>{
+   return !!sessionStorage.getItem("profile")?.accessToken
+}
   export const updateProfileAction=(formData)=>async(dispatch)=>{
     try{
+    
       dispatch(setIsLoading(true));
       const response = await Api.updateUserDetails(formData);
       const { error, data } = response;
@@ -142,7 +147,18 @@ export const setInitialAuthState = (navigate) => async (dispatch) => {
         toast.error(response?.error)
         dispatch(setIsLoading(false))
       } else {
-
+      toast.success(data?.metas?.message)
+      dispatch(setUserDetails(data?.model))
+      dispatch(setIsLoading(false))
+      if(isSession()){
+        const data= JSON.parse(sessionStorage.getItem("profile"))
+        sessionStorage.setItem({...data,user:data?.model})
+      }
+      else{
+        const data= JSON.parse(localStorage.getItem("profile"))
+        localStorage.setItem({...data,user:data?.model})
+      }
+    
       }
     }
     catch(error){
@@ -169,5 +185,62 @@ export const setInitialAuthState = (navigate) => async (dispatch) => {
       console.log(error)
     }
   };
+  
+  export const verifyPhoneAction=(formData,navigate)=>async(dispatch)=>{
+   try{
+       dispatch(setIsLoading(true))
+      const response= await Api.forgotPass(formData)
+      const {data,error}= response
+        console.log({data})
+      if (error) {
+        
+        toast.error(response?.error)
+        dispatch(setIsLoading(false))
+      } else {
+        toast.success(data?.metas?.message)
+        dispatch(setIsLoading(false))
+        navigate(ROUTESCONSTANTS.VERIFICATION,{state:formData});
+      }
+   }
+   catch(error){
 
+   }
+  };
+
+  export const resendOtpAction=(formData,setCodeSent)=>async(dispatch)=>{
+   try{
+       dispatch(setIsLoading(true))
+      const response= await Api.resendOtp(formData)
+      const {data,error}= response
+        console.log({data})
+      if (error) {
+        
+        toast.error(response?.error)
+        dispatch(setIsLoading(false))
+      } else {
+        toast.success(data?.metas?.message)
+        dispatch(setIsLoading(false))
+        setCodeSent(true)
+        // sessionStorage.setItem("codeRese")
+        // navigate(ROUTESCONSTANTS.NEW_PASSWORD,{state:formData});
+      }
+   }
+   catch(error){
+
+   }
+  };
+
+  export const logoutAction=(navigate)=>async(dispatch)=>{
+    try{
+     dispatch(setIsLoading(true))
+     await dispatch(setUserDetails(null))
+     localStorage.removeItem("profile");
+     sessionStorage.removeItem("profile")
+     dispatch(setIsLoading(false))
+     navigate(ROUTESCONSTANTS.LOGIN)
+    }
+    catch(error){
+
+    }
+  }
   

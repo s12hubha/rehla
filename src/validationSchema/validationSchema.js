@@ -21,3 +21,25 @@ DateOfBirth:Yup.date("Enter a Valid Date").required("Enter Date of Birth"),
 // CityId:18,
 // Gender:true,
 })
+export const userSchema= Yup.object().shape({
+    Name:Yup.string().required("Name is Required"),
+Email:Yup.string().email("Enter a Valid Email").required("A Valid Email is Required"),
+
+PhoneKey:Yup.string().max(4,"Enter a Valid Country Code").required("Select a Country Code"),
+
+// IdentityNumber:"1064860119",
+PhoneNumber:Yup.string().matches(phoneRegExp, 'Phone number is not valid')
+.required("Enter Valid Phone Number"),
+DateOfBirth:Yup.date("Enter a Valid Date").required("Enter Date of Birth"),
+// CityId:18,
+// Gender:true,
+})
+
+export const NumberSchema= Yup.object().shape({
+  PhoneNumber:Yup.string().matches(phoneRegExp, 'Phone number is not valid')
+  .required("Enter Valid Phone Number")
+})
+export const OtpSchema= Yup.object().shape({
+  otp:Yup.string().min(4,"Enter a Valid Otp")
+  .required("Enter a 4 digit OTP")
+})

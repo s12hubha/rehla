@@ -32,16 +32,18 @@ import CityTourAlUla from './Pages/CityTourAlUla';
 import MyTrip from './Pages/MyTrip';
 import CityTourAlUlaSingle from './Pages/CityTourAlUlaSingle';
 import PrivateRoute from './layout/PrivateRoute';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CustomSpinner from './Components/CustomLoader/loader';
 import PublicRoute from './layout/PublicRoute';
+import { initializeAuth } from './actions/authAction';
+import Logout from './Pages/logout';
 
 function App() {
   const {userDetails} = useSelector((state) => state.userStore);
   const {isLoading}= useSelector((state)=>state?.commonStore)
-  
+  const dispatch= useDispatch()
   useEffect(()=>{
-    
+    dispatch(initializeAuth())
   },[])
   return (
     <HashRouter>
@@ -63,6 +65,7 @@ function App() {
           <Route exact path="/notifications" element={<Notifications/>} />
           <Route exact path="/my-rates" element={<MyRates/>} />
           <Route exact path="/my-trip" element={<MyTrip/>} />
+          <Route exact path="/logout" element={<Logout/>} />
         </Route>
           <Route  element={<PublicRoute userData={userDetails} />}>
           <Route exact path="/login" element={<Login/>} />

@@ -111,7 +111,7 @@
         min-height: 530px;
     }
     .otp_input {
-        width: 80px;
+        width: 80px !important;
     }
     .verify_code .account_left {
         min-height: 764px;

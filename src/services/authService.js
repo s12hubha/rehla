@@ -27,6 +27,34 @@ export const signUp = async (formData) => {
       return handleApiError(error);
     }
   };
+
+export const forgotPass = async (formData) => {
+    try {
+      const res = await commonInterceptor.get(APICONSTANTS.forgotPassPath(formData), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return { error: null, data: res.data };
+    } catch (error) {
+      return handleApiError(error);
+    }
+  };
+
+
+export const resendOtp = async (formData) => {
+    try {
+      const res = await commonInterceptor.get(APICONSTANTS.ResendOtpPath(formData), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return { error: null, data: res.data };
+    } catch (error) {
+      return handleApiError(error);
+    }
+  };
+  
 export const getUserDetails = async () => {
     try {
       const res = await authInterceptor.get(APICONSTANTS.getUserDetailsPath, {

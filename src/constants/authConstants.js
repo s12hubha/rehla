@@ -3,6 +3,8 @@ export const LOGOUT = "LOGOUT";
 export const APICONSTANTS={
     loginpath:({PhoneNumber,Password})=>`/Users/Login?PhoneNumber=${PhoneNumber}&Password=${Password}`,
     sigupPath:'/Users/Register',
+    forgotPassPath:({PhoneNumber})=>`/forgetPassword?PhoneNumber=${PhoneNumber}`,
+    ResendOtpPath:({PhoneNumber})=>`/ResendPhoneVerification?phone=${PhoneNumber}`,
     getUserDetailsPath:"/Users/GetUserProfile",
     updateProfilePath:"/updateProfile",
     updateProfileImagePath:"/changeUserPhoto",

@@ -3,10 +3,10 @@ import Header from '../Components/Header/Header'
 import Footer from '../Components/Footer/Footer'
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
-import { signUpSchema } from '../validationSchema/validationSchema';
+import { signUpSchema, userSchema } from '../validationSchema/validationSchema';
 import LocalError from '../Components/Error/validationError';
 import { convertBase64 } from '../services/utils';
-import { updateProfileImageAction } from '../actions/authAction';
+import { updateProfileAction, updateProfileImageAction } from '../actions/authAction';
 import moment from 'moment/moment';
 import ProfileSpinner from '../Components/CustomLoader/profileSpinner';
 
@@ -18,7 +18,7 @@ function EditProfile() {
 
    const handleSubmitForm = async (values) => {
        
-      // await dispatch(signUpAction({...values,Gender:values?.Gender==="male"},navigate))
+      await dispatch(updateProfileAction({...values,Gender:values?.Gender==="male"}))
      };
    
 
@@ -32,7 +32,7 @@ function EditProfile() {
       }
       
     };
-    console.log(moment(userDetails?.DateOfBirth).format("yyyy-MM-DD"))
+
   return (
     <>
         <Header/>
@@ -54,7 +54,7 @@ function EditProfile() {
          <Formik
               enableReinitialize
               initialValues={{...userDetails,Gender:userDetails?.Gender?"male":"female"}}
-                validationSchema={signUpSchema}
+                validationSchema={userSchema}
               onSubmit={async (values, { setSubmitting, resetForm }) => {
                 setSubmitting(true);
                 await handleSubmitForm(values);
@@ -68,11 +68,11 @@ function EditProfile() {
                 touched,            
                 handleChange,
                 setFieldValue,
-               
+               handleSubmit
                 
               })=>
                (
-              <form class="edit_profile" id="edit_profile">
+              <form class="edit_profile" id="edit_profile" onSubmit={handleSubmit}>
                <div class="avatar_box edit_avatar">
                   <div class="avatar_inner edit_inner relative">
                       <img src={values?.ProfilePhoto||"images/OBJECTS.webp"} alt="Avatar" id="avatarPreview" class="avatar_img edit_img" />

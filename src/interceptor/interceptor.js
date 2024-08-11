@@ -5,7 +5,7 @@
     config
   ) => {
     console.info(`[request] [${JSON.stringify(config)}]`);
-    const token = localStorage.getItem("profile");
+    const token = localStorage.getItem("profile")||sessionStorage.getItem("profile");
     const access_token = JSON.parse(token)?.accessToken;
    
     if (access_token) {

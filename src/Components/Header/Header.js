@@ -48,7 +48,7 @@ function Header() {
   {title:"Register as Traveler",path:ROUTESCONSTANTS?.REGISTER_TRAVELER,icon:<TravllerSvg/>},
   {title:"Logout",path:ROUTESCONSTANTS?.LOGOUT,icon:<LogoutIconSvg/>},
  ]
- console.log("data=>>>>",{userData})
+
   return (
     <>
       <header className={`header ${isHeaderShown ? 'show' : ''}`}>
