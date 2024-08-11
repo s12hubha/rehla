@@ -47,7 +47,7 @@ function App() {
   },[])
   return (
     <HashRouter>
-      {isLoading && <CustomSpinner/>}
+      {isLoading && <CustomSpinner />}
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
         <Route element={<PrivateRoute userData={userDetails} />}>
@@ -77,24 +77,15 @@ function App() {
           <Route exact path="/contact-us" element={<ContactUs />} />
           <Route exact path="/about-us" element={<AboutUs />} />
           <Route exact path="/faq" element={<Faq />} />
-          <Route exact path="/tourism-tours" element={<TourismTours/>} />
-          <Route exact path="/news" element={<News/>} />
-          
-         
-          <Route exact path="/verification" element={<VerificationCode/>} />
-          <Route exact path="/news-details" element={<NewsDetails/>} />
-          <Route exact path="/privacy-policy" element={<PrivacyPolicy/>} />
-          <Route exact path="/terms-of-use" element={<TermsOfUse/>} />
-          
-          {/* </Route> */}
-          
-          <Route exact path="/registration" element={<Registration/>} />
-        
-         
-          
-          <Route exact path="/city-tour-al-ula" element={<CityTourAlUla/>} />
-         
-          <Route exact path="/city-tour-al-ula-single" element={<CityTourAlUlaSingle/>} />
+          <Route exact path="/tourism-tours" element={<TourismTours />} />
+          <Route exact path="/news" element={<News />} />
+          <Route exact path="/verification" element={<VerificationCode />} />
+          <Route exact path="/news-details" element={<NewsDetails />} />
+          <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route exact path="/terms-of-use" element={<TermsOfUse />} />
+          <Route exact path="/registration" element={<Registration />} />
+          <Route exact path="/city-tour-al-ula" element={<CityTourAlUla />} />
+          <Route exact path="/city-tour-al-ula-single" element={<CityTourAlUlaSingle />} />
         </Routes>
       </Suspense>
     </HashRouter>

@@ -8,6 +8,7 @@ export const APICONSTANTS={
     getUserDetailsPath:"/Users/GetUserProfile",
     updateProfilePath:"/updateProfile",
     updateProfileImagePath:"/changeUserPhoto",
+    AddPrebookingTrip:"/AddPrebookingTrip",
 }
 export const ROUTESCONSTANTS={
     LOGIN:"/login",
