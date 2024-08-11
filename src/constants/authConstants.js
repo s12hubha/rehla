@@ -1,16 +1,20 @@
 export const LOGOUT = "LOGOUT";
 
-export const APICONSTANTS={
-    loginpath:({PhoneNumber,Password})=>`/Users/Login?PhoneNumber=${PhoneNumber}&Password=${Password}`,
-    sigupPath:'/Users/Register',
-    forgotPassPath:({PhoneNumber})=>`/forgetPassword?PhoneNumber=${PhoneNumber}`,
-    ResendOtpPath:({PhoneNumber})=>`/ResendPhoneVerification?phone=${PhoneNumber}`,
-    updatePasswordPath:"verifyOtpAndResetPassword",
-    getUserDetailsPath:"/Users/GetUserProfile",
-    updateProfilePath:"/updateProfile",
-    updateProfileImagePath:"/changeUserPhoto",
-    AddPrebookingTrip:"/AddPrebookingTrip",
+export const APICONSTANTS = {
+    loginpath: ({ PhoneNumber, Password }) => `/Users/Login?PhoneNumber=${PhoneNumber}&Password=${Password}`,
+    sigupPath: '/Users/Register',
+    forgotPassPath: ({ PhoneNumber }) => `/forgetPassword?PhoneNumber=${PhoneNumber}`,
+    ResendOtpPath: ({ PhoneNumber }) => `/ResendPhoneVerification?phone=${PhoneNumber}`,
+    updatePasswordPath: "verifyOtpAndResetPassword",
+    getUserDetailsPath: "/Users/GetUserProfile",
+    updateProfilePath: "/updateProfile",
+    updateProfileImagePath: "/changeUserPhoto",
+    AddPrebookingTrip: "/AddPrebookingTrip",
     getTouristAreas: "getTouristAreas",
+    getAllAdvertisments: "getAllAdvertisments",
+    contactUs: "contactUs",
+    aboutApplication: "aboutApplication",
+    getTermAndConditions: "getTermAndConditions",
 }
 export const ROUTESCONSTANTS = {
     LOGIN: "/login",

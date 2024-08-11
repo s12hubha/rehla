@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from '../Components/Footer/Footer'
 import Header from '../Components/Header/Header'
 import '../css/style.css'
@@ -7,13 +7,14 @@ import '../css/responsive.css'
 import '../css/glightbox.css'
 import { GetTouristAreas } from '../services/tripService'
 function TourismTours() {
+   const [tours, setTours] = useState([])
    useEffect(() => {
-      // getTouristAreas();
+      getTouristAreas();
    }, [])
    const getTouristAreas = async () => {
-      let res = await GetTouristAreas();
-      console.log({ res });
-   }
+      let { data } = await GetTouristAreas();
+      setTours(data?.model)
+   };
    return (
       <>
          <Header />
@@ -36,7 +37,15 @@ function TourismTours() {
                   <p>Fully layered dolor sit amet, nobis id expedita <br /> dolores officiis laboriosam.</p>
                </div>
                <div class="team_inner tourism_inner pt60">
-                  <div class="card_box">
+                  {tours.map((modal, key) => {
+                     return <div class="card_box" key={key}>
+                        <img src={'https://cors-anywhere.herokuapp.com/https://wexapis-uks-uat-apim.azure-api.net/' + modal?.Image} alt={modal?.Name} />
+                        <div class="card_details">
+                           <h3>{modal?.Name} </h3>
+                        </div>
+                     </div>
+                  })}
+                  {/* <div class="card_box">
                      <img src="images/Makkah.webp" alt="img" />
                      <div class="card_details">
                         <h3>Makkah</h3>
@@ -119,7 +128,7 @@ function TourismTours() {
                      <div class="card_details">
                         <h3>Umluj </h3>
                      </div>
-                  </div>
+                  </div> */}
                </div>
             </div>
          </section>

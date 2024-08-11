@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../Components/Header/Header';
 import Footer from '../Components/Footer/Footer';
 import '../css/style.css';
 import '../css/reset.css';
 import '../css/responsive.css';
 import '../css/glightbox.css';
-
+import { GetAllAdvertisments } from '../services/tripService';
+import moment from 'moment';
 const itemsPerPage = 6;
 
 const listItems = [
@@ -128,28 +129,45 @@ const listItems = [
 
 function News() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [list, setList] = useState([]);
 
+  useEffect(() => {
+    getAllAdvertisments();
+  }, [])
+  const getAllAdvertisments = async () => {
+    let { data } = await GetAllAdvertisments();
+    console.log({ data });
+    setList(data?.model)
+  };
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
+  // Description: "استمتع بخصومات تصل الي 30 % من رحلة طوال الشهر"
+  //   ExpirationDate: "2022-05-01T00:00:00" 
+  //    Id: 9 
+  //     Image: "18abbf0ec1e542649e0984dbf841f4b3.jpg" 
+  //      IsActive: true 
+  //       Title: "خصومات 30 %"  
+  //       URL: null
   const renderListItems = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const selectedItems = listItems.slice(startIndex, startIndex + itemsPerPage);
+    const selectedItems = list.slice(startIndex, startIndex + itemsPerPage);
+    // const selectedItems = listItems.slice(startIndex, startIndex + itemsPerPage);
 
     return selectedItems.map((item, index) => (
       <div className="list-item" key={index}>
-        <a href={item.link}>
+        {/* <a href={item.link}> */}
+        <a href={'#/news-details'}>
           <div className="news_img">
-            <img src={item.imgSrc} alt="news"/>
+            <img src={item.Image} alt="news" />
           </div>
           <ul className="autor_detail">
-            <li><img src="images/news/admin.svg" alt="admin"/>{item.admin}</li>
-            <li><img src="images/news/date.svg" alt="date"/>{item.date}</li>
+            <li><img src="images/news/admin.svg" alt="admin" />{item.admin || 'Admin'}</li>
+            <li><img src="images/news/date.svg" alt="date" />{moment(item.ExpirationDate).format('DD MMM YYYY')}</li>
           </ul>
           <div className="recent_content">
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
+            <h3>{item.Title}</h3>
+            <p>{item.Description}</p>
             <span>Read More</span>
           </div>
         </a>
@@ -158,7 +176,8 @@ function News() {
   };
 
   const renderPagination = () => {
-    const totalPages = Math.ceil(listItems.length / itemsPerPage);
+    // const totalPages = Math.ceil(listItems.length / itemsPerPage);
+    const totalPages = Math.ceil(list.length / itemsPerPage);
     const pages = [];
 
     for (let i = 1; i <= totalPages; i++) {
@@ -178,15 +197,15 @@ function News() {
 
   return (
     <>
-      <Header/>
-      <section className="banners" style={{backgroundImage: `url(${'../../images/banners_bg.webp'})`}}>
+      <Header />
+      <section className="banners" style={{ backgroundImage: `url(${'../../images/banners_bg.webp'})` }}>
         <div className="container">
           <div className="banner_head">
             <h1>News</h1>
-            <p>An enim nullam tempor sapien gravida donec enim ipsum <br/> porta justo  congue purus pretium ligula </p>
+            <p>An enim nullam tempor sapien gravida donec enim ipsum <br /> porta justo  congue purus pretium ligula </p>
           </div>
           <div className="bredcrub">
-            <a href="index.html" target="_self"> Home </a><span> <img src="images/arrow.png" alt="arrow"/></span> 
+            <a href="index.html" target="_self"> Home </a><span> <img src="images/arrow.png" alt="arrow" /></span>
             <p>News </p>
           </div>
         </div>
@@ -198,7 +217,7 @@ function News() {
               <div className="news_group">
                 <input type="search" placeholder="Type to search..." name="search" id="search" />
                 <button type="Submit" id="news_submit" value="">
-                  <img src="images/search.png" alt="search"/>
+                  <img src="images/search.png" alt="search" />
                 </button>
               </div>
             </form>
@@ -215,7 +234,7 @@ function News() {
               <h3>Recent News</h3>
               <div className="recent_news">
                 <div className="recent_img">
-                  <img src="images/news/news1.jpg" alt="news"/>
+                  <img src="images/news/news1.jpg" alt="news" />
                 </div>
                 <div className="recent_detail">
                   <h4>Don’t Count on Free to Win You Customers</h4>
@@ -224,7 +243,7 @@ function News() {
               </div>
               <div className="recent_news">
                 <div className="recent_img">
-                  <img src="images/news/news2.jpg" alt="news"/>
+                  <img src="images/news/news2.jpg" alt="news" />
                 </div>
                 <div className="recent_detail">
                   <h4>Is Your Organization Building Bridges?</h4>
@@ -233,7 +252,7 @@ function News() {
               </div>
               <div className="recent_news">
                 <div className="recent_img">
-                  <img src="images/news/news3.jpg" alt="news"/>
+                  <img src="images/news/news3.jpg" alt="news" />
                 </div>
                 <div className="recent_detail">
                   <h4>What Makes a Degree Review Successful?</h4>
@@ -242,7 +261,7 @@ function News() {
               </div>
               <div className="recent_news">
                 <div className="recent_img">
-                  <img src="images/news/news4.jpg" alt="news"/>
+                  <img src="images/news/news4.jpg" alt="news" />
                 </div>
                 <div className="recent_detail">
                   <h4>Getting Your Team to Buy into a Big Change</h4>
@@ -274,7 +293,7 @@ function News() {
           </div>
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </>
   );
 }
