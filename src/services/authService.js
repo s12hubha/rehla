@@ -54,6 +54,18 @@ export const resendOtp = async (formData) => {
       return handleApiError(error);
     }
   };
+export const updatePassword = async (formData) => {
+    try {
+      const res = await commonInterceptor.post(APICONSTANTS.updatePasswordPath,formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return { error: null, data: res.data };
+    } catch (error) {
+      return handleApiError(error);
+    }
+  };
   
 export const getUserDetails = async () => {
     try {

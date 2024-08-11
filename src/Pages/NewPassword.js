@@ -5,7 +5,19 @@ import '../css/style.css'
 import '../css/reset.css'
 import '../css/responsive.css'
 import '../css/glightbox.css'
+import { Formik } from 'formik'
+import { updatePasswordSchema } from '../validationSchema/validationSchema'
+import { useLocation } from 'react-router-dom'
+import LocalError from '../Components/Error/validationError'
+import { useDispatch } from 'react-redux'
+import { updatePasswordAction } from '../actions/authAction'
 function NewPassword() {
+ const {state}=useLocation();
+ const dispatch =useDispatch()
+console.log({state})
+  const handleSubmitForm=(value)=>{
+    dispatch(updatePasswordAction({...value,...state}))
+  }
   return (
     <>
         <Header/>
@@ -22,23 +34,45 @@ function NewPassword() {
             <img src="images/form_company_logo.webp" alt="company logo image" />
             <h2 class="box_heading">New password</h2>
             <p>Please enter new password</p>
-            <form class="login_account new_password" method="post" action="#" id="new_password">
+            <Formik
+              enableReinitialize
+              initialValues={{NewPassword:"",confirmNewPassword:""}}
+                validationSchema={updatePasswordSchema}
+              onSubmit={async (values, { setSubmitting, resetForm }) => {
+                setSubmitting(true);
+                await handleSubmitForm(values);
+                resetForm();
+                setSubmitting(false);
+              }}
+            >
+            {({
+                values,
+                errors,
+                touched,            
+                handleChange,
+                setFieldValue,
+               handleSubmit             
+              })=>( <form class="login_account new_password" onSubmit={handleSubmit} id="new_password">
             <div class="form_group">
                    <label for="password1">Password*</label>
                    <div class="password_box">
-                       <input type="password" id="password1" name="password1" class="password_input" placeholder="Password" required/>
+                       <input type="password" id="password1" name="NewPassword" class="password_input" placeholder="Password" onChange={handleChange}/>
                        <span class="show_password" onclick="togglePassword('password1')">👁️</span>
                    </div>
+                   <LocalError touched={touched.NewPassword} error={errors.NewPassword} />
                </div>
                <div class="form_group">
                    <label for="password2">Password*</label>
                    <div class="password_box">
-                       <input type="password" id="password2" name="password2" class="password_input" placeholder="Password" required />
+                       <input type="password" id="password2" name="confirmNewPassword" class="password_input" placeholder="Password" onChange={handleChange} />
                        <span class="show_password" onclick="togglePassword('password2')">👁️</span>
                    </div>
+                   <LocalError touched={touched.confirmNewPassword} error={errors.confirmNewPassword} />
                </div>
             <button type="submit" class="login_button register_btn passwrd_btn" value="Change password">Change password</button>
-        </form>
+        </form>)}
+            </Formik>
+           
          </div>
       </div>
    </section>

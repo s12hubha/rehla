@@ -5,6 +5,7 @@ export const APICONSTANTS={
     sigupPath:'/Users/Register',
     forgotPassPath:({PhoneNumber})=>`/forgetPassword?PhoneNumber=${PhoneNumber}`,
     ResendOtpPath:({PhoneNumber})=>`/ResendPhoneVerification?phone=${PhoneNumber}`,
+    updatePasswordPath:"verifyOtpAndResetPassword",
     getUserDetailsPath:"/Users/GetUserProfile",
     updateProfilePath:"/updateProfile",
     updateProfileImagePath:"/changeUserPhoto",

@@ -46,7 +46,12 @@ export const OtpSchema= Yup.object().shape({
   // CityId:18,
   // Gender:true,
 })
+export const updatePasswordSchema=Yup.object().shape({
+  NewPassword:Yup.string().required("Password is Required"),
+  confirmNewPassword:Yup.string()
+  .oneOf([Yup.ref('NewPassword'), null], 'Passwords must match')
 
+})
 export const prebookingSchema = Yup.object().shape({
   FromCaption: Yup.string(),
   ToCaption: Yup.string(),

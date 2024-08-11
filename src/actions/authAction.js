@@ -88,7 +88,7 @@ export const setInitialAuthState = (navigate) => async (dispatch) => {
         toast.error(response?.error)
         dispatch(setIsLoading(false))
       } else {
-        console.log({data})
+       
         toast.success(data?.metas?.message)
         dispatch(setIsLoading(false))
         // if (!isConsentGiven) {
@@ -119,13 +119,38 @@ export const setInitialAuthState = (navigate) => async (dispatch) => {
       dispatch(setIsLoading(true));
       const response = await Api.getUserDetails();
       const { error, data } = response;
-      console.log({data})
+      
       if (error) {
         
         toast.error(response?.error)
         dispatch(setIsLoading(false))
       } else {
 
+      }
+    }
+    catch(error){
+
+    }
+  }
+  export const updatePasswordAction=(formData,navigate)=>async(dispatch)=>{
+    try{
+      const payload={
+        "PhoneNumber": formData?.PhoneNumber,
+        "Otp": formData?.otp,
+        "NewPassword": formData?.NewPassword
+      }
+      dispatch(setIsLoading(true));
+      const response = await Api.updatePassword(payload);
+      const { error, data } = response;
+      
+      if (error) {
+        
+        toast.error(response?.error)
+        dispatch(setIsLoading(false))
+      } else {
+        toast.success(data?.metas?.message)
+        dispatch(setIsLoading(false))
+        navigate(ROUTESCONSTANTS.LOGIN)
       }
     }
     catch(error){
@@ -171,7 +196,7 @@ export const isSession=()=>{
       dispatch(setIsUploading(true));
       const response = await Api.updateProfileImage(formData);
       const { error, data } = response;
-      console.log({data,response})
+      
       if (error) {
         
         toast.error(response?.error)

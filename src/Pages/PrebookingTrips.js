@@ -4,7 +4,9 @@ import Footer from '../Components/Footer/Footer'
 import { Formik } from 'formik';
 import { prebookingSchema } from '../validationSchema/validationSchema';
 import LocalError from '../Components/Error/validationError';
-import { AddPrebookingTrip } from '../services/commonService';
+import { useDispatch } from 'react-redux';
+import { addNewTripAction } from '../actions/tripAction';
+
 
 function PrebookingTrips() {
    const [tripDetails, setTripDetails] = useState({
@@ -35,8 +37,11 @@ function PrebookingTrips() {
       PaymentType: "",
       start_time: "",
    });
-   const handleSubmitForm = async (values) => {
 
+   const dispatch =useDispatch();
+
+   const handleSubmitForm = async (values) => {
+        dispatch(addNewTripAction(values))
       // let res = await AddPrebookingTrip(values)
       // console.log({ res });
    };
