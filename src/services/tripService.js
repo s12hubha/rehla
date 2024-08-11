@@ -4,14 +4,24 @@ import authInterceptor from "../interceptor/authinterceptor";
 import { handleApiError } from "./utils";
 
 export const addPrebookingTrip = async (formData) => {
-    try {
-      const res = await authInterceptor.post(APICONSTANTS.AddPrebookingTrip,formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      return { error: null, data: res.data };
-    } catch (error) {
-      return handleApiError(error);
-    }
-  };
+  try {
+    const res = await authInterceptor.post(APICONSTANTS.AddPrebookingTrip, formData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return { error: null, data: res.data };
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
+export const GetTouristAreas = async (data) => {
+  try {
+    const res = await authInterceptor.get(APICONSTANTS.getTouristAreas);
+    return { error: null, data: res.data };
+  }
+  catch (error) {
+    return handleApiError(error)
+  }
+}
