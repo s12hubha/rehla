@@ -6,8 +6,10 @@ import '../css/reset.css'
 import '../css/responsive.css'
 import '../css/glightbox.css'
 import { GetTouristAreas } from '../services/tripService'
+import { useNavigate } from 'react-router-dom'
 function TourismTours() {
-   const [tours, setTours] = useState([])
+   const [tours, setTours] = useState([]);
+   const navigate = useNavigate()
    useEffect(() => {
       getTouristAreas();
    }, [])
@@ -38,92 +40,92 @@ function TourismTours() {
                </div>
                <div class="team_inner tourism_inner pt60">
                   {tours.map((modal, key) => {
-                     return <div class="card_box" key={key}>
+                     return <div class="card_box" key={key} onClick={() => navigate('/city-tour-al-ula')}>
                         <img src={'https://cors-anywhere.herokuapp.com/https://wexapis-uks-uat-apim.azure-api.net/' + modal?.Image} alt={modal?.Name} />
                         <div class="card_details">
                            <h3>{modal?.Name} </h3>
                         </div>
                      </div>
                   })}
-                  {/* <div class="card_box">
+                  {/* <div class="card_box" onClick={()=>navigate('/city-tour-al-ula')}>
                      <img src="images/Makkah.webp" alt="img" />
                      <div class="card_details">
                         <h3>Makkah</h3>
                      </div>
                   </div>
-                  <div class="card_box">
+                  <div class="card_box" onClick={()=>navigate('/city-tour-al-ula')}>
                      <img src="images/Al-Ula.webp" alt="img" />
                      <div class="card_details">
                         <h3>Al-Ula</h3>
                      </div>
                   </div>
-                  <div class="card_box">
+                  <div class="card_box" onClick={()=>navigate('/city-tour-al-ula')}>
                      <img src="images/Al-Ahsa.webp" alt="img" />
                      <div class="card_details">
                         <h3>Al Ahsa</h3>
                      </div>
                   </div>
-                  <div class="card_box">
+                  <div class="card_box" onClick={()=>navigate('/city-tour-al-ula')}>
                      <img src="images/Al-Medina.webp" alt="img" />
                      <div class="card_details">
                         <h3>Al-Medina</h3>
                      </div>
                   </div>
-                  <div class="card_box">
+                  <div class="card_box" onClick={()=>navigate('/city-tour-al-ula')}>
                      <img src="images/Riyadh.webp" alt="img" />
                      <div class="card_details">
                         <h3>Riyadh</h3>
                      </div>
                   </div>
-                  <div class="card_box">
+                  <div class="card_box" onClick={()=>navigate('/city-tour-al-ula')}>
                      <img src="images/Jizan.webp" alt="img" />
                      <div class="card_details">
                         <h3>Jizan</h3>
                      </div>
                   </div>
-                  <div class="card_box">
+                  <div class="card_box" onClick={()=>navigate('/city-tour-al-ula')}>
                      <img src="images/NEOM- TABUk.webp" alt="img" />
                      <div class="card_details">
                         <h3>NEOM- TABUk</h3>
                      </div>
                   </div>
-                  <div class="card_box">
+                  <div class="card_box" onClick={()=>navigate('/city-tour-al-ula')}>
                      <img src="images/Taif.webp" alt="img" />
                      <div class="card_details">
                         <h3>Taif </h3>
                      </div>
                   </div>
-                  <div class="card_box">
+                  <div class="card_box" onClick={()=>navigate('/city-tour-al-ula')}>
                      <img src="images/Najran.webp" alt="img" />
                      <div class="card_details">
                         <h3>Najran</h3>
                      </div>
                   </div>
-                  <div class="card_box">
+                  <div class="card_box" onClick={()=>navigate('/city-tour-al-ula')}>
                      <img src="images/Abha.webp" alt="img" />
                      <div class="card_details">
                         <h3>Abha </h3>
                      </div>
                   </div>
-                  <div class="card_box">
+                  <div class="card_box" onClick={()=>navigate('/city-tour-al-ula')}>
                      <img src="images/Jeddah.webp" alt="img" />
                      <div class="card_details">
                         <h3>Jeddah </h3>
                      </div>
                   </div>
-                  <div class="card_box">
+                  <div class="card_box" onClick={()=>navigate('/city-tour-al-ula')}>
                      <img src="images/Al-Khobar.webp" alt="img" />
                      <div class="card_details">
                         <h3>Al Khobar </h3>
                      </div>
                   </div>
-                  <div class="card_box">
+                  <div class="card_box" onClick={()=>navigate('/city-tour-al-ula')}>
                      <img src="images/Albaha.webp" alt="img" />
                      <div class="card_details">
                         <h3>Albaha </h3>
                      </div>
                   </div>
-                  <div class="card_box">
+                  <div class="card_box" onClick={()=>navigate('/city-tour-al-ula')}>
                      <img src="images/Umluj.webp" alt="img" />
                      <div class="card_details">
                         <h3>Umluj </h3>
