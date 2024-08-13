@@ -1,8 +1,10 @@
 import React from 'react'
 import Footer from '../Components/Footer/Footer'
 import Header from '../Components/Header/Header'
+import { useSelector } from 'react-redux'
 
 function MyPreferences() {
+   const {preferences}= useSelector(state=>state?.preferenceStore)
   return (
     <>
         <Header/>
