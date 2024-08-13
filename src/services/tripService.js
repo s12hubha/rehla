@@ -62,3 +62,30 @@ export const GetTermAndConditions = async () => {
     return handleApiError(error)
   }
 }
+export const GetTransactions = async (page = 1) => {
+  try {
+    const res = await authInterceptor.get(APICONSTANTS.getAllTransactions(page));
+    return { error: null, data: res.data };
+  }
+  catch (error) {
+    return handleApiError(error)
+  }
+}
+export const AddWithdrawalRequest = async (data) => {
+  try {
+    const res = await authInterceptor.post(APICONSTANTS.addWithdrawalRequest(data));
+    return { error: null, data: res.data };
+  }
+  catch (error) {
+    return handleApiError(error)
+  }
+}
+export const AddTransaction = async (data) => {
+  try {
+    const res = await authInterceptor.get(APICONSTANTS.addTransaction(data));
+    return { error: null, data: res.data };
+  }
+  catch (error) {
+    return handleApiError(error)
+  }
+}
