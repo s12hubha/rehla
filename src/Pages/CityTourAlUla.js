@@ -45,8 +45,8 @@ function CityTourAlUla() {
                   <p>An enim nullam tempor sapien gravida donec enim ipsum porta justo  congue purus pretium ligula An enim nullam tempor sapien gravida donec enim ipsum porta justo  congue purus pretium ligula An enim nullam tempor sapien gravida donec enim ipsum </p>
                </div> 
                <div class="btn_group">
-                  <a href="javascript:void(0)" class="program_btn">The Program</a>
-                  <a href="javascript:void(0)" class="booking_btn">Book a tour</a>
+                  <a href="#/city-tour-al-ula-single" class="program_btn">The Program</a>
+                  <a href="#/book-tour" class="booking_btn">Book a tour</a>
                </div>   
             </div>
             <div class="city_tour_box">

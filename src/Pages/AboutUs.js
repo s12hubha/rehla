@@ -12,6 +12,7 @@ import '../css/responsive.css';
 import '../css/glightbox.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { AboutApplication } from '../services/tripService';
 
 function AboutUs() {
   useEffect(() => {
@@ -62,6 +63,14 @@ function AboutUs() {
     const lightboxInlineIframe = GLightbox({ selector: '.glightbox4' });
 
   }, []);
+
+  useEffect(() => {
+    aboutApplication();
+  }, [])
+  const aboutApplication = async () => {
+    let res = await AboutApplication();
+    console.log({ res });
+  };
 
   return (
     <>

@@ -14,42 +14,42 @@ export const signUpSchema = Yup.object().shape({
   Password: Yup.string().required("Password is required"),
   PhoneKey: Yup.string().max(4, "Enter a Valid Country Code").required("Select a Country Code"),
 
-// IdentityNumber:"1064860119",
-PhoneNumber:Yup.string().matches(phoneRegExp, 'Phone number is not valid')
-.required("Enter Valid Phone Number"),
-DateOfBirth:Yup.date("Enter a Valid Date").required("Enter Date of Birth"),
-// CityId:18,
-// Gender:true,
+  // IdentityNumber:"1064860119",
+  PhoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
+    .required("Enter Valid Phone Number"),
+  DateOfBirth: Yup.date("Enter a Valid Date").required("Enter Date of Birth"),
+  // CityId:18,
+  // Gender:true,
 })
-export const userSchema= Yup.object().shape({
-    Name:Yup.string().required("Name is Required"),
-Email:Yup.string().email("Enter a Valid Email").required("A Valid Email is Required"),
+export const userSchema = Yup.object().shape({
+  Name: Yup.string().required("Name is Required"),
+  Email: Yup.string().email("Enter a Valid Email").required("A Valid Email is Required"),
 
-PhoneKey:Yup.string().max(4,"Enter a Valid Country Code").required("Select a Country Code"),
+  PhoneKey: Yup.string().max(4, "Enter a Valid Country Code").required("Select a Country Code"),
 
-// IdentityNumber:"1064860119",
-PhoneNumber:Yup.string().matches(phoneRegExp, 'Phone number is not valid')
-.required("Enter Valid Phone Number"),
-DateOfBirth:Yup.date("Enter a Valid Date").required("Enter Date of Birth"),
-// CityId:18,
-// Gender:true,
+  // IdentityNumber:"1064860119",
+  PhoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
+    .required("Enter Valid Phone Number"),
+  DateOfBirth: Yup.date("Enter a Valid Date").required("Enter Date of Birth"),
+  // CityId:18,
+  // Gender:true,
 })
 
-export const NumberSchema= Yup.object().shape({
-  PhoneNumber:Yup.string().matches(phoneRegExp, 'Phone number is not valid')
-  .required("Enter Valid Phone Number")
+export const NumberSchema = Yup.object().shape({
+  PhoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
+    .required("Enter Valid Phone Number")
 })
-export const OtpSchema= Yup.object().shape({
-  otp:Yup.string().min(4,"Enter a Valid Otp")
-  .required("Enter a 4 digit OTP")
+export const OtpSchema = Yup.object().shape({
+  otp: Yup.string().min(4, "Enter a Valid Otp")
+    .required("Enter a 4 digit OTP")
   // IdentityNumber:"1064860119",
   // CityId:18,
   // Gender:true,
 })
-export const updatePasswordSchema=Yup.object().shape({
-  NewPassword:Yup.string().required("Password is Required"),
-  confirmNewPassword:Yup.string()
-  .oneOf([Yup.ref('NewPassword'), null], 'Passwords must match')
+export const updatePasswordSchema = Yup.object().shape({
+  NewPassword: Yup.string().required("Password is Required"),
+  confirmNewPassword: Yup.string()
+    .oneOf([Yup.ref('NewPassword'), null], 'Passwords must match')
 
 })
 export const prebookingSchema = Yup.object().shape({
@@ -80,4 +80,11 @@ export const prebookingSchema = Yup.object().shape({
   PaymentType: Yup.string().required("Payment Type is Required"),
 
   start_time: Yup.string().required("Time is Required"),//temp for start time
+})
+export const contactUsSchema = Yup.object().shape({
+  UserName: Yup.string().required("Name is Required"),
+  UserPhoneKey: Yup.string().max(4, "Enter a Valid Country Code").required("Select a Country Code"),
+  UserPhoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Enter Valid Phone Number"),
+  UserEmail: Yup.string().email("Enter a Valid Email").required("A Valid Email is Required"),
+  Message:Yup.string().required("Message is Required"),
 })
