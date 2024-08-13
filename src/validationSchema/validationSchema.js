@@ -83,8 +83,16 @@ export const prebookingSchema = Yup.object().shape({
 })
 export const contactUsSchema = Yup.object().shape({
   UserName: Yup.string().required("Name is Required"),
-  UserPhoneKey: Yup.string().max(4, "Enter a Valid Country Code").required("Select a Country Code"),
-  UserPhoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Enter Valid Phone Number"),
+  // UserPhoneKey: Yup.string().max(4, "Enter a Valid Country Code").required("Select a Country Code"),
+  // UserPhoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required("Enter Valid Phone Number"),
   UserEmail: Yup.string().email("Enter a Valid Email").required("A Valid Email is Required"),
-  Message:Yup.string().required("Message is Required"),
+  Message: Yup.string().required("Message is Required"),
 })
+export const widrawSchema = Yup.object().shape({
+  "Amount": Yup.string().required("Amount is Required"),
+  "AccountNumber": Yup.string().required("Account Number is Required"),
+  "BankId": Yup.string().required("Bank is Required"),
+});
+export const addBalanceSchema = Yup.object().shape({
+  "CardNumber": Yup.string().required("Card Number is Required"),
+});

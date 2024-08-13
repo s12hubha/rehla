@@ -15,7 +15,10 @@ export const APICONSTANTS = {
     contactUs: "contactUs",
     aboutApplication: "aboutApplication",
     getTermAndConditions: "getTermAndConditions",
-    getRatesByUserId:({id})=>`/getAllRatesByUserId?UserId=${id}&Page=1`
+    getRatesByUserId:({id})=>`/getAllRatesByUserId?UserId=${id}&Page=1`,
+    getAllTransactions: (page = 0) => `GetAllTransactions?Page=${1}`,
+    addTransaction: (CardNumber) => `AddTransaction?CardNumber=${CardNumber}`,
+    addWithdrawalRequest: "AddWithdrawalRequest",
 }
 export const ROUTESCONSTANTS = {
     LOGIN: "/login",
