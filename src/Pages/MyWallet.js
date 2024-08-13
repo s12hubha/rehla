@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Components/Header/Header'
 import Footer from '../Components/Footer/Footer'
 import { GetTransactions } from '../services/tripService';
 
 function MyWallet() {
+   const [transaction, setTransaction] = useState({})
    useEffect(() => {
       getTransaction();
    }, [])
    const getTransaction = async () => {
-      let res = await GetTransactions();
-      console.log({ res });
+      let { data } = await GetTransactions();
+      setTransaction(data?.model);
    };
    return (
       <>
@@ -31,12 +32,26 @@ function MyWallet() {
                <div class="wallet_bal">
                   <img src="images/my-wallet.webp" alt=" wallet cart" />
                   <h4>Wallet balance</h4>
-                  <h2>350.50 SAR</h2>
+                  <h2>{transaction?.TotalAmount} SAR</h2>
+                  {/* <h2>350.50 SAR</h2> */}
                </div>
                <div class="history_box">
                   <h4>Wallet history</h4>
                   <div class="balance_grid">
                      <div class="add_box">
+                        {transaction?.Transactions?.map((data) => {
+                           return (
+                              <div class="wallet_history">
+                                 <div class="add_blnc">
+                                    <h5>Withdraw a balance</h5>
+                                    <p>An amount of 12,500 riyals was deducted as a result of withdrawing an amount from the wallet via bank transfer</p>
+                                 </div>
+                                 <div class="withdraw_date">
+                                    <p> <span>3- 3-2023 , 6 Am </span> <strong>12.500 SAR </strong></p>
+                                 </div>
+                              </div>
+                           )
+                        })}
                         <div class="wallet_history">
                            <div class="add_blnc">
                               <h5>Add balance</h5>

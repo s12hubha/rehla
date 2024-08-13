@@ -11,15 +11,15 @@ import LocalError from './Error/validationError'
 function ContactForm() {
 	const [constactUs, setContactUs] = useState({
 		"UserName": "Banan",
-		"UserPhoneKey": "+2",
-		"UserPhoneNumber": "1141107334",
+		// "UserPhoneKey": "+2",
+		// "UserPhoneNumber": "1141107334",
 		"UserEmail": "banan@rehla.com",
 		"Message": "any message"
 	});
 	const handleSubmitForm = async (values) => {
 		console.log({ values });
-		// let res = await ContactUs(values)
-		// console.log({ res });
+		let res = await ContactUs(values)
+		console.log({ res });
 	};
 	return (
 		<>
@@ -105,9 +105,7 @@ function ContactForm() {
 											</div>
 										</div>
 									</form>
-								)
-								}
-
+								)}
 							</Formik>
 						</div>
 					</div>

@@ -5,58 +5,105 @@ import '../css/responsive.css'
 import '../css/glightbox.css'
 import Header from '../Components/Header/Header'
 import Footer from '../Components/Footer/Footer'
+import { Formik } from 'formik'
+import { widrawSchema } from '../validationSchema/validationSchema'
+import LocalError from '../Components/Error/validationError'
+import { AddWithdrawalRequest } from '../services/tripService'
+import { useNavigate } from 'react-router-dom'
 function WithdrawBalance() {
-  return (
-    <>
-        <Header/>
-        <section class="banners" style={{backgroundImage: `url(${'../../images/banners_bg.webp'})`}}>
-      <div class="container">
-         <div class="banner_head">
-            <h1>My Wallet</h1>
-            <p>An enim nullam tempor sapien gravida donec enim ipsum <br/> porta justo  congue purus pretium ligula </p>
-         </div>
-         <div class="bredcrub">
-            <a href="index.html" target="_self"> Home </a><span> <img src="images/arrow.png" alt="arrow"/></span> 
-            <p>My Wallet </p>
-         </div>
-      </div>
-   </section>
-   <section class="my_wallet withdraw_balance">
-      <div class="container">
-      	<div class="withdraw_inner_box">
-      		<div class="wallet_bal withdraw_bal">
-	            <img src="images/Withdraw-balance.webp" alt="Withdraw-balance"/>
-	            <h4>Wallet balance</h4>
-	            <p>The amount will be transferred to your account Within 24 hours</p>
-	         </div>
-	         <div class="withdraw_inner ptb60">
-	         	<form class="withdraw_form" id="withdraw_form" method="post" action="#" name="withdraw_form">
-	         		<div class="withdraw_group">
-	         			<label for="license">The amount required</label>
-	         			<input type="text" name="license" id="license" placeholder="Attach a copy of the license"/>
-	         		</div>
-	         		<div class="withdraw_group">
-	         			<label for="IBAN">IBAN number</label>
-	         			<input type="text" name="IBAN" id="IBAN" placeholder="Attach a copy of the license"/>
-	         		</div>
-	         		<div class="withdraw_group">
-	         			<label for="bank_name">Bank Name</label>
-	         			<select id="bank_name">
-	         				<option value="Attach a copy of the license">Attach a copy of the license</option>
-	         				<option value="Bank of India">Bank of India</option>
-	         				<option value="State Bank of India">State Bank of India</option>
-	         				<option value="Bank of America">Bank of America</option>
-	         			</select>
-	         		</div>
-	         		<button type="submit" class="withdraw_sub">Withdraw a balance</button>
-	         	</form>
-	         </div>
-      	</div>
-      </div>
-   </section>
-        <Footer/>
-    </>
-  )
+	const navigate = useNavigate();
+
+	const handleSubmitForm = async (values) => {
+		console.log({ values });
+		// let res = await AddWithdrawalRequest(values)
+		// console.log({ res });
+		navigate('/my-wallet')
+
+	};
+	return (
+		<>
+			<Header />
+			<section class="banners" style={{ backgroundImage: `url(${'../../images/banners_bg.webp'})` }}>
+				<div class="container">
+					<div class="banner_head">
+						<h1>My Wallet</h1>
+						<p>An enim nullam tempor sapien gravida donec enim ipsum <br /> porta justo  congue purus pretium ligula </p>
+					</div>
+					<div class="bredcrub">
+						<a href="index.html" target="_self"> Home </a><span> <img src="images/arrow.png" alt="arrow" /></span>
+						<p>My Wallet </p>
+					</div>
+				</div>
+			</section>
+			<section class="my_wallet withdraw_balance">
+				<div class="container">
+					<div class="withdraw_inner_box">
+						<div class="wallet_bal withdraw_bal">
+							<img src="images/Withdraw-balance.webp" alt="Withdraw-balance" />
+							<h4>Wallet balance</h4>
+							<p>The amount will be transferred to your account Within 24 hours</p>
+						</div>
+						<div class="withdraw_inner ptb60">
+							<Formik
+								enableReinitialize
+								initialValues={{
+									Amount: "",
+									AccountNumber: "",
+									BankId: ""
+								}}
+								validationSchema={widrawSchema}
+								validateOnChange={false}
+								validateOnBlur={false}
+								onSubmit={async (values, { setSubmitting, resetForm }) => {
+									setSubmitting(true);
+									await handleSubmitForm(values);
+									console.log({ values });
+									resetForm();
+									setSubmitting(false);
+								}}
+							>
+								{({
+									values,
+									errors,
+									touched,
+									handleChange,
+									setFieldValue,
+									handleSubmit
+								}) =>
+								(
+									<form id="withdraw_form" onSubmit={handleSubmit} name="withdraw_form">
+										{/* <form class="withdraw_form" id="withdraw_form" method="post" action="#" name="withdraw_form"> */}
+										<div class="withdraw_group">
+											<label for="license">The amount required</label>
+											<input type="text" id="Amount" value={values?.Amount} placeholder="Attach a copy of the license" onChange={handleChange} />
+											<LocalError touched={touched.Amount} error={errors.Amount} />
+										</div>
+										<div class="withdraw_group">
+											<label for="IBAN">IBAN number</label>
+											<input type="text" id="AccountNumber" value={values?.AccountNumber} placeholder="Attach a copy of the license" onChange={handleChange} />
+											<LocalError touched={touched.AccountNumber} error={errors.AccountNumber} />
+										</div>
+										<div class="withdraw_group">
+											<label for="bank_name">Bank Name</label>
+											<select id="BankId" value={values?.BankId} onChange={handleChange}>
+												<option value="Attach a copy of the license">Attach a copy of the license</option>
+												<option value="Bank of India">Bank of India</option>
+												<option value="State Bank of India">State Bank of India</option>
+												<option value="Bank of America">Bank of America</option>
+											</select>
+											<LocalError touched={touched.BankId} error={errors.BankId} />
+										</div>
+										<button type="submit" class="withdraw_sub">Withdraw a balance</button>
+									</form>
+								)}
+							</Formik>
+						</div>
+					</div>
+				</div>
+			</section>
+			<Footer />
+		</>
+	)
 }
 
 export default WithdrawBalance

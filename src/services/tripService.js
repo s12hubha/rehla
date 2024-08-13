@@ -37,7 +37,7 @@ export const GetAllAdvertisments = async () => {
 }
 export const ContactUs = async (data) => {
   try {
-    const res = await commonInterceptor.post(APICONSTANTS.contactUs, data);
+    const res = await authInterceptor.post(APICONSTANTS.contactUs, data);
     return { error: null, data: res.data };
   }
   catch (error) {
