@@ -15,6 +15,7 @@ export const APICONSTANTS = {
     contactUs: "contactUs",
     aboutApplication: "aboutApplication",
     getTermAndConditions: "getTermAndConditions",
+    getRatesByUserId:({id})=>`/getAllRatesByUserId?UserId=${id}&Page=1`
 }
 export const ROUTESCONSTANTS = {
     LOGIN: "/login",

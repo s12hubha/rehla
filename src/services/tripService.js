@@ -62,3 +62,13 @@ export const GetTermAndConditions = async () => {
     return handleApiError(error)
   }
 }
+
+export const getRatingsByUserId = async (formData) => {
+  try {
+    const res = await authInterceptor.get(APICONSTANTS.getRatesByUserId(formData));
+    return { error: null, data: res.data };
+  }
+  catch (error) {
+    return handleApiError(error)
+  }
+}

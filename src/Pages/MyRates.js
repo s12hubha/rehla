@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../Components/Header/Header'
 import Footer from '../Components/Footer/Footer'
+import { useDispatch, useSelector } from 'react-redux'
+import { getMyRates } from '../actions/tripAction'
 
 function MyRates() {
+   const dispatch= useDispatch()
+   const {userDetails} = useSelector((state) => state.userStore);
+   useEffect(()=>{
+     dispatch(getMyRates({id:userDetails?.Id}))
+   },[])
   return (
     <>
         <Header/>

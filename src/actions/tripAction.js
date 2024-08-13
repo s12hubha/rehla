@@ -21,3 +21,24 @@ export const addNewTripAction=(formData,navigate)=>async(dispatch)=>{
  
     }
    };
+
+export const getMyRates=(formData)=>async(dispatch)=>{
+    try{
+        dispatch(setIsLoading(true))
+       const response= await TripApi.getRatingsByUserId(formData)
+       const {data,error}= response
+         console.log({data})
+       if (error) {
+         
+         toast.error(response?.error)
+         dispatch(setIsLoading(false))
+       } else {
+         toast.success(data?.metas?.message)
+         dispatch(setIsLoading(false))
+        //  navigate(ROUTESCONSTANTS.VERIFICATION,{state:formData});
+       }
+    }
+    catch(error){
+ 
+    }
+}
