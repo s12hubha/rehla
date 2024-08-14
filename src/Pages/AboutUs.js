@@ -1,18 +1,17 @@
-import React, { useEffect } from 'react';
-import Isotope from 'isotope-layout';
-import GLightbox from 'glightbox';
-import Header from '../Components/Header/Header';
-import Footer from '../Components/Footer/Footer';
-import AboutHeroSection from '../Components/AboutHeroSection';
-import Offer from '../Components/Offer';
-import AppStore from '../Components/AppStore';
-import '../css/style.css';
-import '../css/reset.css';
-import '../css/responsive.css';
-import '../css/glightbox.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { AboutApplication } from '../services/tripService';
+import GLightbox from 'glightbox';
+import Isotope from 'isotope-layout';
+import React, { useEffect } from 'react';
+import AboutHeroSection from '../Components/AboutHeroSection';
+import AppStore from '../Components/AppStore';
+import Footer from '../Components/Footer/Footer';
+import Header from '../Components/Header/Header';
+import Offer from '../Components/Offer';
+import '../css/glightbox.css';
+import '../css/reset.css';
+import '../css/responsive.css';
+import '../css/style.css';
 
 function AboutUs() {
   useEffect(() => {
@@ -64,13 +63,6 @@ function AboutUs() {
 
   }, []);
 
-  useEffect(() => {
-    aboutApplication();
-  }, [])
-  const aboutApplication = async () => {
-    let res = await AboutApplication();
-    console.log({ res });
-  };
 
   return (
     <>
