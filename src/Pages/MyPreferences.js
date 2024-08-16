@@ -5,6 +5,9 @@ import { useSelector } from 'react-redux'
 
 function MyPreferences() {
    const {preferences}= useSelector(state=>state?.preferenceStore)
+   const handlePreferences=()=>{
+      
+   }
   return (
     <>
         <Header/>

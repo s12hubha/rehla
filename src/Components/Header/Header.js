@@ -6,7 +6,7 @@ import '../../css/responsive.css';
 import '../../css/glightbox.css';
 import { useSelector } from 'react-redux';
 import EditProfile from '../../Pages/EditProfile';
-import { BellIconSvg, EditProfileSVG, HeartSvg, LogoutIconSvg, PathSvg, ReservationIconSvg, ShieldSvg, StarSvg, TravllerSvg, WalletSvg } from '../../assets/svgs';
+import { BellIconSvg, EditProfileSVG, HeartSvg, LogoutIconSvg, PathSvg, ReservationIconSvg, ShieldSvg, StarSvg, TravllerSvg, UserIconSvg, WalletSvg } from '../../assets/svgs';
 import { ROUTESCONSTANTS } from '../../constants/authConstants';
 
 function Header() {
@@ -69,7 +69,7 @@ function Header() {
           </div>
           <div className="toggle_grid">
             <ul ref={wrapperRef} className="login_box relative">
-              {userData?.userDetails?<li><Link to="#" className="login" onClick={()=>setShowNavBar(!showNavBar)}>{userData?.userDetails?.Name}</Link></li>:<li><Link to="/login" className="login">Login</Link></li>}
+              {userData?.userDetails?<li><Link to="#" className="login" onClick={()=>setShowNavBar(!showNavBar)}><UserIconSvg/>{userData?.userDetails?.Name}</Link></li>:<li><Link to="/login" className="login">Login</Link></li>}
               {isAuth && showNavBar && <div className='dropdown_menu'>
                 {HeadNav?.map(nav=><div onClick={()=>setShowNavBar(!showNavBar)} className='nav-link-container'>
                   {nav?.icon}
