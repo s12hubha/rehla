@@ -6,44 +6,53 @@ import { prebookingSchema } from '../validationSchema/validationSchema';
 import LocalError from '../Components/Error/validationError';
 import { useDispatch } from 'react-redux';
 import { addNewTripAction } from '../actions/tripAction';
+import { addPrebookingTrip } from '../services/tripService';
+import { useNavigate } from 'react-router-dom';
 
 
 function PrebookingTrips() {
+   const navigate = useNavigate()
    const [tripDetails, setTripDetails] = useState({
-      FromCaption: "",
-      ToCaption: "",
-      FromLatitude: "",
-      FromLongitude: "",
-      ToLatitude: "",
-      ToLongitude: "",
+      // FromCaption: "",
+      // ToCaption: "",
+      // FromLatitude: "",
+      // FromLongitude: "",
+      // ToLatitude: "",
+      // ToLongitude: "",
       SourceCity: "",
       DistinationCity: "",
       StartDateTime: "",
-      EndDateTime: "",
-      ExpectedDistance: "",
-      ExpectedCost: "",
-      RealCost: "",
-      RealCostWithoutCommission: "",
-      SeatCountId: "",
-      IsGoingOnly: "",
-      ReturnStartDateTime: "",
-      ReturnEndDateTime: "",
-      DiscountProgramId: "",
+      // EndDateTime: "",
+      // ExpectedDistance: "",
+      // ExpectedCost: "",
+      // RealCost: "",
+      // RealCostWithoutCommission: "",
+      // SeatCountId: "",
+      // IsGoingOnly: "",
+      // ReturnStartDateTime: "",
+      // ReturnEndDateTime: "",
+      // DiscountProgramId: "",
       CarCategoryId: "",
-      Description: "",
-      Coupon: "",
+      // Description: "",
+      // Coupon: "",
       CouponValue: "",
-      SystemSettingId: "",
+      // SystemSettingId: "",
       PaymentType: "",
       start_time: "",
    });
 
-   const dispatch =useDispatch();
+   const dispatch = useDispatch();
 
    const handleSubmitForm = async (values) => {
-        dispatch(addNewTripAction(values))
-      // let res = await AddPrebookingTrip(values)
-      // console.log({ res });
+      let post = {
+         ...values,
+         StartDateTime: values?.StartDateTime + " " + values?.start_time
+      }
+      console.log({ post });
+      // dispatch(addNewTripAction(post));
+      let res = await addPrebookingTrip(post)
+      console.log({ res });
+      navigate('/my-trip')
    };
    return (
       <>
@@ -70,8 +79,8 @@ function PrebookingTrips() {
                   validateOnBlur={false}
                   onSubmit={async (values, { setSubmitting, resetForm }) => {
                      setSubmitting(true);
-                     await handleSubmitForm(values);
                      console.log({ values });
+                     await handleSubmitForm(values);
                      resetForm();
                      setSubmitting(false);
                   }}
@@ -124,6 +133,8 @@ function PrebookingTrips() {
                                     <option value="debit">Debit Card</option>
                                     <option value="paypal">PayPal</option>
                                  </select>
+                                 <LocalError touched={touched.PaymentType} error={errors.PaymentType} />
+
                               </div>
                               <div class="booking_group">
                                  <label for="CarCategoryId">Select car category</label>
@@ -133,6 +144,8 @@ function PrebookingTrips() {
                                     <option value="luxury">Luxury</option>
                                     <option value="suv">SUV</option>
                                  </select>
+                                 <LocalError touched={touched.CarCategoryId} error={errors.CarCategoryId} />
+
                               </div>
                            </div>
                            <div class="booking_group">

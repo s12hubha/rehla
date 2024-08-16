@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import Header from '../Components/Header/Header'
-import Footer from '../Components/Footer/Footer'
+import React, { useEffect, useState } from 'react';
+import Footer from '../Components/Footer/Footer';
+import Header from '../Components/Header/Header';
 import { GetTransactions } from '../services/tripService';
 
 function MyWallet() {
@@ -12,6 +12,7 @@ function MyWallet() {
       let { data } = await GetTransactions();
       setTransaction(data?.model);
    };
+
    return (
       <>
          <Header />

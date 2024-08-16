@@ -1,18 +1,28 @@
 import { Formik } from 'formik';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LocalError from '../Components/Error/validationError';
 import Footer from '../Components/Footer/Footer';
 import Header from '../Components/Header/Header';
 import { addBalanceSchema } from '../validationSchema/validationSchema';
+import { GetBanks } from '../services/tripService';
 
 function AddBalance() {
    const navigate = useNavigate();
+   const [bank, setBanks] = useState([])
+   useEffect(() => {
+      getBanks()
+   }, []);
+   const getBanks = async () => {
+      let { data } = await GetBanks();
+      console.log({ data });
+      setBanks(data?.model)
+   };
    const handleSubmitForm = async (values) => {
       console.log({ values });
       // let res = await AddTransaction(values)
       // console.log({ res });
-      // navigate('/add-balance')
+      navigate('/register-traveler')
    };
    return (
       <>
@@ -67,10 +77,15 @@ function AddBalance() {
                               <div class="withdraw_group">
                                  <label for="shipping_card">Shipping card number</label>
                                  <select id="CardNumber" onChange={handleChange}>
-                                    <option value="Attach a copy of the license">Attach a copy of the license</option>
+                                    {bank?.map((data) => {
+                                       return (
+                                          <option value={data?.Id}>{data?.Name}</option>
+                                       )
+                                    })}
+                                    {/* <option value="Attach a copy of the license">Attach a copy of the license</option>
                                     <option value="Bank of India">Bank of India</option>
                                     <option value="State Bank of India">State Bank of India</option>
-                                    <option value="Bank of America">Bank of America</option>
+                                    <option value="Bank of America">Bank of America</option> */}
                                  </select>
                               </div>
                               <LocalError touched={touched.CardNumber} error={errors.CardNumber} />

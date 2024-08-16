@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../css/style.css'
 import '../css/reset.css'
 import '../css/responsive.css'
@@ -8,16 +8,25 @@ import Footer from '../Components/Footer/Footer'
 import { Formik } from 'formik'
 import { widrawSchema } from '../validationSchema/validationSchema'
 import LocalError from '../Components/Error/validationError'
-import { AddWithdrawalRequest } from '../services/tripService'
+import { AddWithdrawalRequest, GetBanks } from '../services/tripService'
 import { useNavigate } from 'react-router-dom'
 function WithdrawBalance() {
 	const navigate = useNavigate();
+	const [bank, setBanks] = useState([])
+	useEffect(() => {
+		getBanks()
+	}, []);
+	const getBanks = async () => {
+		let { data } = await GetBanks();
+		console.log({ data });
+		setBanks(data?.model)
+	};
 
 	const handleSubmitForm = async (values) => {
 		console.log({ values });
-		// let res = await AddWithdrawalRequest(values)
-		// console.log({ res });
-		navigate('/my-wallet')
+		let res = await AddWithdrawalRequest(values)
+		console.log({ res });
+		navigate('/my-wallet');
 
 	};
 	return (
@@ -57,7 +66,6 @@ function WithdrawBalance() {
 								onSubmit={async (values, { setSubmitting, resetForm }) => {
 									setSubmitting(true);
 									await handleSubmitForm(values);
-									console.log({ values });
 									resetForm();
 									setSubmitting(false);
 								}}
@@ -75,7 +83,7 @@ function WithdrawBalance() {
 										{/* <form class="withdraw_form" id="withdraw_form" method="post" action="#" name="withdraw_form"> */}
 										<div class="withdraw_group">
 											<label for="license">The amount required</label>
-											<input type="text" id="Amount" value={values?.Amount} placeholder="Attach a copy of the license" onChange={handleChange} />
+											<input type="number" min={1} id="Amount" value={values?.Amount} placeholder="Attach a copy of the license" onChange={handleChange} />
 											<LocalError touched={touched.Amount} error={errors.Amount} />
 										</div>
 										<div class="withdraw_group">
@@ -86,10 +94,15 @@ function WithdrawBalance() {
 										<div class="withdraw_group">
 											<label for="bank_name">Bank Name</label>
 											<select id="BankId" value={values?.BankId} onChange={handleChange}>
-												<option value="Attach a copy of the license">Attach a copy of the license</option>
+												{bank?.map((data) => {
+													return (
+														<option value={data?.Id}>{data?.Name}</option>
+													)
+												})}
+												{/* <option value="Attach a copy of the license">Attach a copy of the license</option>
 												<option value="Bank of India">Bank of India</option>
 												<option value="State Bank of India">State Bank of India</option>
-												<option value="Bank of America">Bank of America</option>
+												<option value="Bank of America">Bank of America</option> */}
 											</select>
 											<LocalError touched={touched.BankId} error={errors.BankId} />
 										</div>
