@@ -4,7 +4,7 @@
   const onAuthRequest = (
     config
   ) => {
-    console.info(`[request] [${JSON.stringify(config)}]`);
+    // console.info(`[request] [${JSON.stringify(config)}]`);
     const token = localStorage.getItem("profile")||sessionStorage.getItem("profile");
     const access_token = JSON.parse(token)?.accessToken;
    
@@ -28,7 +28,7 @@
   };
   
   const onResponse = (response) => {
-    console.info(`[response] [${JSON.stringify(response)}]`);
+    // console.info(`[response] [${JSON.stringify(response)}]`);
     return response;
   };
   

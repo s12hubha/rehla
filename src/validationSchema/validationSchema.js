@@ -89,10 +89,13 @@ export const contactUsSchema = Yup.object().shape({
   Message: Yup.string().required("Message is Required"),
 })
 export const widrawSchema = Yup.object().shape({
-  "Amount": Yup.string().required("Amount is Required"),
+  "Amount": Yup.number().required("Amount is Required"),
   "AccountNumber": Yup.string().required("Account Number is Required"),
   "BankId": Yup.string().required("Bank is Required"),
 });
 export const addBalanceSchema = Yup.object().shape({
+  "CardNumber": Yup.string().required("Card Number is Required"),
+});
+export const registerTravelerSchema = Yup.object().shape({
   "CardNumber": Yup.string().required("Card Number is Required"),
 });

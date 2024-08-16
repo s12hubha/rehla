@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Components/Header/Header'
 import Footer from '../Components/Footer/Footer'
 import '../css/style.css'
@@ -7,12 +7,14 @@ import '../css/responsive.css'
 import '../css/glightbox.css'
 import { GetTermAndConditions } from '../services/tripService'
 function TermsOfUse() {
+   const [terms, setTerms] = useState({})
    useEffect(() => {
       termsAndCondition();
    }, [])
    const termsAndCondition = async () => {
-      let res = await GetTermAndConditions();
-      console.log({ res });
+      let { data } = await GetTermAndConditions();
+      console.log({ data });
+      setTerms(data?.model[0])
    };
    return (
       <>
@@ -20,8 +22,10 @@ function TermsOfUse() {
          <section class="banners" style={{ backgroundImage: `url(${'../../images/banners_bg.webp'})` }}>
             <div class="container">
                <div class="banner_head">
-                  <h1>Terms of Use</h1>
-                  <p>An enim nullam tempor sapien gravida donec enim ipsum <br /> porta justo  congue purus pretium ligula </p>
+                  {/* <h1>Terms of Use</h1> */}
+                  {/* <p>An enim nullam tempor sapien gravida donec enim ipsum <br /> porta justo  congue purus pretium ligula </p> */}
+                  <h1>{terms?.Title}</h1>
+                  <p>{terms?.Discription}</p>
                </div>
                <div class="bredcrub">
                   <a href="index.html" target="_self"> Home </a><span> <img src="images/arrow.png" alt="arrow" /></span>

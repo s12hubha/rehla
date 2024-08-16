@@ -73,29 +73,38 @@ export const getRatingsByUserId = async (formData) => {
   }
 }
 export const GetTransactions = async (page = 1) => {
-    try {
-      const res = await authInterceptor.get(APICONSTANTS.getAllTransactions(page));
-      return { error: null, data: res.data };
-    }
-    catch (error) {
-      return handleApiError(error)
-    }
+  try {
+    const res = await authInterceptor.get(APICONSTANTS.getAllTransactions(page));
+    return { error: null, data: res.data };
   }
-  export const AddWithdrawalRequest = async (data) => {
-    try {
-      const res = await authInterceptor.post(APICONSTANTS.addWithdrawalRequest(data));
-      return { error: null, data: res.data };
-    }
-    catch (error) {
-      return handleApiError(error)
-    }
+  catch (error) {
+    return handleApiError(error)
   }
-  export const AddTransaction = async (data) => {
-    try {
-      const res = await authInterceptor.get(APICONSTANTS.addTransaction(data));
-      return { error: null, data: res.data };
-    }
-    catch (error) {
-      return handleApiError(error)
-    }
+}
+export const AddWithdrawalRequest = async (data) => {
+  try {
+    const res = await authInterceptor.post(APICONSTANTS.addWithdrawalRequest(data));
+    return { error: null, data: res.data };
   }
+  catch (error) {
+    return handleApiError(error)
+  }
+}
+export const AddTransaction = async (data) => {
+  try {
+    const res = await authInterceptor.get(APICONSTANTS.addTransaction(data));
+    return { error: null, data: res.data };
+  }
+  catch (error) {
+    return handleApiError(error)
+  }
+}
+export const GetBanks = async () => {
+  try {
+    const res = await authInterceptor.get(APICONSTANTS.getBanks);
+    return { error: null, data: res.data };
+  }
+  catch (error) {
+    return handleApiError(error)
+  }
+}

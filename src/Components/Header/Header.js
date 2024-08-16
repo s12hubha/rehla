@@ -11,9 +11,9 @@ import { ROUTESCONSTANTS } from '../../constants/authConstants';
 
 function Header() {
   const [isHeaderShown, setIsHeaderShown] = useState(false);
-  const [showNavBar,setShowNavBar]= useState(false)
+  const [showNavBar, setShowNavBar] = useState(false)
   const userData = useSelector((state) => state.userStore);
-  const {isAuth}=userData
+  const { isAuth } = userData
   const wrapperRef = useRef(null);
   const handleToggle = () => {
     setIsHeaderShown(!isHeaderShown);
@@ -25,7 +25,7 @@ function Header() {
      */
     function handleClickOutside(event) {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-       
+
         setShowNavBar(false)
       }
     }
@@ -36,18 +36,18 @@ function Header() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [wrapperRef]);
- const HeadNav=[
-  {title:"Edit Profile",path:ROUTESCONSTANTS?.EDIT_PROFILE,icon:<EditProfileSVG/>},
-  {title:"My Trips",path:ROUTESCONSTANTS?.MY_TRIP,icon:<PathSvg/>},
-  {title:"My Reservation",path:"",icon:<ReservationIconSvg/>},
-  {title:"My Wallet",path:ROUTESCONSTANTS?.MY_WALLET,icon:<WalletSvg/>},
-  {title:"My Rates",path:ROUTESCONSTANTS?.MY_RATES,icon:<StarSvg/>},
-  {title:"My Preferences",path:ROUTESCONSTANTS?.MY_PREFERENCE,icon:<HeartSvg/>},
-  {title:"Verification",path:ROUTESCONSTANTS?.VERIFICATION,icon:<ShieldSvg/>},
-  {title:"Notification",path:ROUTESCONSTANTS?.VERIFICATIONS,icon:<BellIconSvg/>},
-  {title:"Register as Traveler",path:ROUTESCONSTANTS?.REGISTER_TRAVELER,icon:<TravllerSvg/>},
-  {title:"Logout",path:ROUTESCONSTANTS?.LOGOUT,icon:<LogoutIconSvg/>},
- ]
+  const HeadNav = [
+    { title: "Edit Profile", path: ROUTESCONSTANTS?.EDIT_PROFILE, icon: <EditProfileSVG /> },
+    { title: "My Trips", path: ROUTESCONSTANTS?.MY_TRIP, icon: <PathSvg /> },
+    { title: "My Reservation", path: "", icon: <ReservationIconSvg /> },
+    { title: "My Wallet", path: ROUTESCONSTANTS?.MY_WALLET, icon: <WalletSvg /> },
+    { title: "My Rates", path: ROUTESCONSTANTS?.MY_RATES, icon: <StarSvg /> },
+    { title: "My Preferences", path: ROUTESCONSTANTS?.MY_PREFERENCE, icon: <HeartSvg /> },
+    { title: "Verification", path: ROUTESCONSTANTS?.VERIFICATION, icon: <ShieldSvg /> },
+    { title: "Notification", path: ROUTESCONSTANTS?.VERIFICATIONS, icon: <BellIconSvg /> },
+    { title: "Register as Traveler", path: ROUTESCONSTANTS?.REGISTER_TRAVELER, icon: <TravllerSvg /> },
+    { title: "Logout", path: ROUTESCONSTANTS?.LOGOUT, icon: <LogoutIconSvg /> },
+  ]
 
   return (
     <>
@@ -71,7 +71,7 @@ function Header() {
             <ul ref={wrapperRef} className="login_box relative">
               {userData?.userDetails?<li><Link to="#" className="login" onClick={()=>setShowNavBar(!showNavBar)}><UserIconSvg/>{userData?.userDetails?.Name}</Link></li>:<li><Link to="/login" className="login">Login</Link></li>}
               {isAuth && showNavBar && <div className='dropdown_menu'>
-                {HeadNav?.map(nav=><div onClick={()=>setShowNavBar(!showNavBar)} className='nav-link-container'>
+                {HeadNav?.map(nav => <div onClick={() => setShowNavBar(!showNavBar)} className='nav-link-container'>
                   {nav?.icon}
                   <Link to={nav?.path} className='text-link' >{nav?.title}</Link>
                 </div>)}
@@ -101,7 +101,7 @@ function Header() {
               </svg>
             </div>
           </div>
-         
+
         </div>
       </header>
     </>

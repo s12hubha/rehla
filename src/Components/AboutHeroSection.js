@@ -25,7 +25,7 @@ function AboutHeroSection() {
             {/* <p>An enim nullam tempor sapien gravida donec enim ipsum <br /> porta justo  congue purus pretium ligula </p> */}
           </div>
           <div class="bredcrub">
-            <a href="index.html" target="_self"> Home </a><span> ></span> <p>AboutUs </p>
+            <a href="index.html" target="_self"> Home </a><span> {'>'}</span> <p>AboutUs </p>
           </div>
         </div>
       </section>

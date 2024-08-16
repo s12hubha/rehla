@@ -56,7 +56,7 @@ function AddBalanceForm() {
                      <form class="add_balance_form" id="add_balance_form" name="withdraw_form">
                         {/* <form class="add_balance_form" id="add_balance_form" method="post" action="#" name="withdraw_form"> */}
                         <div class="balance_group">
-                           <input type="radio" id="prepaid_card" name="CardNumber" value='09537778862901' />
+                           <input type="radio" id="prepaid_card" name="CardNumber" value='09537778862901' defaultChecked />
                            <label for="prepaid_card" class="custom_radio"><span class="card_img"> <img src="images/mastercard.webp" /></span>
                               <span> Prepaid card </span>
                            </label>

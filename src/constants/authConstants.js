@@ -19,6 +19,7 @@ export const APICONSTANTS = {
     getAllTransactions: (page = 0) => `GetAllTransactions?Page=${1}`,
     addTransaction: (CardNumber) => `AddTransaction?CardNumber=${CardNumber}`,
     addWithdrawalRequest: "AddWithdrawalRequest",
+    getBanks: "getBanks",
 }
 export const ROUTESCONSTANTS = {
     LOGIN: "/login",
