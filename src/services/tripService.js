@@ -108,3 +108,21 @@ export const GetBanks = async () => {
     return handleApiError(error)
   }
 }
+export const RequestEmailVerification = async (data) => {
+  try {
+    const res = await authInterceptor.get(APICONSTANTS.requestEmailVerification(data));
+    return { error: null, data: res.data };
+  }
+  catch (error) {
+    return handleApiError(error)
+  }
+}
+export const RequestUserPhoneVerification = async (data) => {
+  try {
+    const res = await authInterceptor.get(APICONSTANTS.requestUserPhoneVerification(data));
+    return { error: null, data: res.data };
+  }
+  catch (error) {
+    return handleApiError(error)
+  }
+}
