@@ -2,7 +2,7 @@ import * as Yup from "yup";
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 export const loginSchema = Yup.object().shape({
   PhoneNumber: Yup.string()
-    .min(10, "too short")
+    .min(9, "too short")
     .matches(phoneRegExp, 'Phone number is not valid')
     .required("Enter Valid Phone Number"),
   Password: Yup.string().required("Enter Your Password Here")
